@@ -8,12 +8,12 @@ import (
 
 // FolderInfos : Infos sur un dossier
 type FolderInfos struct {
-	TotalSubFolders  uint32
+	TotalSubFolders  uint
 	TotalSubFiles    int
 	FolderName       string
 	DiskName         string
 	DirsAccessDenied int
-	TotalSize        uint64
+	TotalSize        uint
 }
 
 // GetInfos : Retourne les infos sur le dossier
@@ -37,8 +37,8 @@ func GetInfos(path string) FolderInfos {
 			temp.TotalSubFolders++
 		} else {
 			temp.TotalSubFiles++
-			temp.TotalSize += uint64(infos.Size())
 		}
+		temp.TotalSize += uint(infos.Size())
 
 		return nil
 	})
