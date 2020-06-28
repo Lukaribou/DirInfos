@@ -3,33 +3,45 @@ package main
 import (
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 // FolderInfos : Infos sur un dossier
 type FolderInfos struct {
-	// Total des dossiers en dessous
-	TotalSubFolders int
-	// Total des fichiers en dessous
-	TotalSubFiles int
+	TotalSubFolders  uint32
+	TotalSubFiles    int
+	FolderName       string
+	DiskName         string
+	DirsAccessDenied int
+	TotalSize        uint64
 }
 
 // GetInfos : Retourne les infos sur le dossier
-func GetInfos(path string) (FolderInfos, error) {
+func GetInfos(path string) FolderInfos {
 	var temp FolderInfos
+	path = strings.ReplaceAll(path, "\\", "/")
+
+	t := strings.Split(path, "/")
+
+	temp.DiskName = strings.Replace(t[0], ":", "", 1)
+	temp.FolderName = t[len(t)-1]
 
 	filepath.Walk(path, func(filePath string, infos os.FileInfo, err error) error {
 		if err != nil {
-			panic(err)
+			if os.IsPermission(err) {
+				temp.DirsAccessDenied++
+			}
 		}
 
 		if infos.IsDir() {
 			temp.TotalSubFolders++
 		} else {
 			temp.TotalSubFiles++
+			temp.TotalSize += uint64(infos.Size())
 		}
 
 		return nil
 	})
 
-	return temp, nil
+	return temp
 }
