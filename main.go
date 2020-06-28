@@ -10,14 +10,14 @@ func main() {
 
 	fmt.Printf(
 		`
-Infos sur le dossier: "%s"
+Infos sur le dossier: %s
 
 Disque: %s
 Sous dossiers: %d (Accès refusés: %d)
 Fichiers: %d
-Taille: %do
+Taille: %s octets
 `,
-		infos.FolderName, infos.DiskName, infos.TotalSubFolders, infos.TotalSubFiles, infos.DirsAccessDenied, infos.TotalSize)
+		infos.FolderName, infos.DiskName, infos.TotalSubFolders, infos.DirsAccessDenied, infos.TotalSubFiles, SpaceEvery3(infos.TotalSize))
 }
 
 func getCmdUserPosition() string {
