@@ -27,10 +27,8 @@ func GetInfos(path string) FolderInfos {
 	temp.FolderName = t[len(t)-1]
 
 	filepath.Walk(path, func(filePath string, infos os.FileInfo, err error) error {
-		if err != nil {
-			if os.IsPermission(err) {
-				temp.DirsAccessDenied++
-			}
+		if err != nil && os.IsPermission(err) {
+			temp.DirsAccessDenied++
 		}
 
 		if infos.IsDir() {
