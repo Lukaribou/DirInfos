@@ -12,12 +12,14 @@ func main() {
 		`
 Infos sur le dossier: %s
 
+Chemin absolu: %s
 Disque: %s
+
 Sous dossiers: %d (Accès refusés: %d)
 Fichiers: %d
-Taille: %s octets
+Taille: ~%s octets
 `,
-		infos.FolderName, infos.DiskName, infos.TotalSubFolders, infos.DirsAccessDenied, infos.TotalSubFiles, SpaceEvery3(infos.TotalSize))
+		infos.FolderName, infos.AbsolutePath, infos.DiskName, infos.TotalSubFolders, infos.DirsAccessDenied, infos.TotalSubFiles, SpaceEvery3(infos.TotalSize))
 }
 
 func getCmdUserPosition() string {

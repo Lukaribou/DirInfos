@@ -8,10 +8,11 @@ import (
 
 // FolderInfos : Infos sur un dossier
 type FolderInfos struct {
-	TotalSubFolders  uint
-	TotalSubFiles    int
 	FolderName       string
 	DiskName         string
+	AbsolutePath     string
+	TotalSubFolders  uint
+	TotalSubFiles    int
 	DirsAccessDenied int
 	TotalSize        uint
 }
@@ -25,6 +26,7 @@ func GetInfos(path string) FolderInfos {
 
 	temp.DiskName = strings.Replace(t[0], ":", "", 1)
 	temp.FolderName = t[len(t)-1]
+	temp.AbsolutePath = path
 
 	filepath.Walk(path, func(filePath string, infos os.FileInfo, err error) error {
 		if err != nil && os.IsPermission(err) {
@@ -35,8 +37,8 @@ func GetInfos(path string) FolderInfos {
 			temp.TotalSubFolders++
 		} else {
 			temp.TotalSubFiles++
+			temp.TotalSize += uint(infos.Size())
 		}
-		temp.TotalSize += uint(infos.Size())
 
 		return nil
 	})
