@@ -53,3 +53,19 @@ func GetInfos(path string) FolderInfos {
 
 	return temp
 }
+
+// Find : Cherche le fichier/dossier à partir du path
+func Find(name string, isTypeDir bool, path string) ([]string, int) {
+	var found []string
+	count := 0
+
+	filepath.Walk(path, func(filePath string, infos os.FileInfo, err error) error {
+		if strings.ToLower(name) == strings.ToLower(infos.Name()) && infos.IsDir() == isTypeDir {
+			found = append(found, filePath)
+		}
+
+		count++
+		return nil
+	})
+	return found, count
+}
