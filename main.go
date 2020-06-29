@@ -12,12 +12,19 @@ func main() {
 	switch len(os.Args) {
 	case 1:
 		infosCommand()
+	case 2:
+		switch os.Args[1] {
+		case "--help", "-h":
+			helpCommand()
+		default:
+			fmt.Println("Commande inconnue pour 2 arguments.")
+		}
 	case 4:
 		switch os.Args[1] {
 		case "--find", "-f":
 			findCommand()
 		default:
-			fmt.Println("")
+			fmt.Println("Commande inconnue pour 4 arguments.")
 		}
 	default:
 		fmt.Println("Nombre d'arguments incorrect !")
@@ -81,6 +88,14 @@ func findCommand() {
 			fmt.Println("\t", f)
 		}
 	}
+}
+
+func helpCommand() {
+	fmt.Println(`
+Liste des commandes:
+	rien => Affiche des informations sur le dossier actuel.
+	-f, --find [file/dir] [recherche] => Recherche le(s) fichier(s)/dossier(s) dans tous les sous-dossiers du dossier actuel.
+	-h, --help => Affiche cette page d'aide.`)
 }
 
 func getCmdUserPosition() string {
