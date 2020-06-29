@@ -13,8 +13,8 @@ type FolderInfos struct {
 	DiskName         string
 	AbsolutePath     string
 	TotalSubFolders  uint
-	TotalSubFiles    int
-	DirsAccessDenied int
+	TotalSubFiles    uint
+	DirsAccessDenied uint
 	TotalSize        uint
 	CreationTime     string
 }

@@ -15,8 +15,8 @@ Infos sur le dossier: %s
 Chemin absolu: %s
 Disque: %s
 
-Sous dossiers: %d (Accès refusés: %d)
-Fichiers: %d
+Sous dossiers: %s (Accès refusés: %s)
+Fichiers: %s
 Taille: ~%s octets
 
 Date de création: %s
@@ -24,8 +24,8 @@ Date de création: %s
 		infos.FolderName,
 		infos.AbsolutePath,
 		infos.DiskName,
-		infos.TotalSubFolders, infos.DirsAccessDenied,
-		infos.TotalSubFiles,
+		SpaceEvery3(infos.TotalSubFolders), SpaceEvery3(infos.DirsAccessDenied),
+		SpaceEvery3(infos.TotalSubFiles),
 		SpaceEvery3(infos.TotalSize),
 		infos.CreationTime)
 }
