@@ -2,7 +2,9 @@ package main
 
 import (
 	"bytes"
+	"fmt"
 	"strconv"
+	"time"
 )
 
 // CheckAndPanic : Panic si err != nil
@@ -48,4 +50,21 @@ func insertNth(str string, toInsert rune, allTheN int) string { // https://stack
 	}
 
 	return buffer.String()
+}
+
+// TimestampToDate : Renvoie la date correspondant au timestamp
+func TimestampToDate(nano int64) string {
+	t := time.Unix(0, nano)
+	return fmt.Sprintf("%s/%s/%d %sh%sm%ss",
+		put0(t.Day()),
+		put0(int(t.Month())),
+		t.Year(),
+		put0(t.Hour()),
+		put0(t.Minute()),
+		put0(t.Second()))
+
+}
+
+func put0(t int) string {
+	return ("0" + strconv.Itoa(t))[len("0"+strconv.Itoa(t))-2:]
 }

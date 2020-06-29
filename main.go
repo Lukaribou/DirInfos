@@ -18,8 +18,16 @@ Disque: %s
 Sous dossiers: %d (Accès refusés: %d)
 Fichiers: %d
 Taille: ~%s octets
+
+Date de création: %s
 `,
-		infos.FolderName, infos.AbsolutePath, infos.DiskName, infos.TotalSubFolders, infos.DirsAccessDenied, infos.TotalSubFiles, SpaceEvery3(infos.TotalSize))
+		infos.FolderName,
+		infos.AbsolutePath,
+		infos.DiskName,
+		infos.TotalSubFolders, infos.DirsAccessDenied,
+		infos.TotalSubFiles,
+		SpaceEvery3(infos.TotalSize),
+		infos.CreationTime)
 }
 
 func getCmdUserPosition() string {
